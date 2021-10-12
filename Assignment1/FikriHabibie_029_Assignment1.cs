@@ -4,10 +4,14 @@ using System.Collections.Generic;
 
 public class FikriHabibie_001_Assignment1{
     public static void Main(string[] args){
+        Console.WriteLine("\n=== Selamat data di Assignment 1 ===");
+        Console.WriteLine("Nama Saya\t: Fikri Habibie");
+        Console.WriteLine("Nomor Peserta\t: 029");
+        Console.WriteLine("Asal\t\t: Tangerang\n");
         while(true){
             try
             {
-                Console.WriteLine("=== Menu ===");
+                Console.WriteLine("=== Menu ===\n");
                 Console.WriteLine("Pilihan : ");
                 Console.WriteLine("1. Soal 1 (Segitiga Alfabet)");
                 Console.WriteLine("2. Soal 2 (Segitiga Angka)");
@@ -15,7 +19,7 @@ public class FikriHabibie_001_Assignment1{
                 Console.WriteLine("4. Soal 4 (Balik Angka)");
                 Console.WriteLine("5. Soal 5 (Converter angka)");
                 Console.WriteLine("6. Soal Tambahan (Palindrom)");
-                Console.WriteLine("0. Exit");
+                Console.WriteLine("0. Exit\n");
                 Console.Write("Masukkan Pilihan : ");
                 int pilih = int.Parse(Console.ReadLine());
 

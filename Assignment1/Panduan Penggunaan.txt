@@ -1,0 +1,25 @@
+link github:
+https://github.com/Habibie6706154113/OCBC---H8
+
+cara run program:
+1. run menggunakan mono
+2. pilih soal yang terdapat pada menu:
+   - soal 1:
+	> masukkan jumlah baris yang diinginkan
+	> akan muncul segitiga alfabet sesuai banyak baris yang diinput
+   - soal 2:
+	> masukkan jumlah baris yang diinginkan
+	> akan muncul segitiga angka sesuai banyak baris yang diinput
+   - soal 3:
+	> masukkan angka
+	> akan muncul hasil faktorial dari angka yang diinput
+   - soal 4:
+	> masukkan angka
+	> akan muncul angka yang telah direverse
+   - soal 5:
+	> masukkan angka
+	> akan muncul ejaan dari angka yang diinput
+   - soal tambahan:
+	> masukkan kata
+	> program akan memberi tahu apakah kata yang dimasukkan palindrom atau bukan
+3. inputkan angka 0 saat memilih menu untuk mengakhiri program
