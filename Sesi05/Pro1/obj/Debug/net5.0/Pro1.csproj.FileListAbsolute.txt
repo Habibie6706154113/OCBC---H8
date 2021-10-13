@@ -1,0 +1,16 @@
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\obj\Debug\net5.0\Pro1.csproj.AssemblyReference.cache
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\obj\Debug\net5.0\Pro1.GeneratedMSBuildEditorConfig.editorconfig
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\obj\Debug\net5.0\Pro1.AssemblyInfoInputs.cache
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\obj\Debug\net5.0\Pro1.AssemblyInfo.cs
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\obj\Debug\net5.0\Pro1.csproj.CoreCompileInputs.cache
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\bin\Debug\net5.0\Pro1.exe
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\bin\Debug\net5.0\Pro1.deps.json
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\bin\Debug\net5.0\Pro1.runtimeconfig.json
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\bin\Debug\net5.0\Pro1.runtimeconfig.dev.json
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\bin\Debug\net5.0\Pro1.dll
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\bin\Debug\net5.0\ref\Pro1.dll
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\bin\Debug\net5.0\Pro1.pdb
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\obj\Debug\net5.0\Pro1.dll
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\obj\Debug\net5.0\ref\Pro1.dll
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\obj\Debug\net5.0\Pro1.pdb
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Pro1\obj\Debug\net5.0\Pro1.genruntimeconfig.cache

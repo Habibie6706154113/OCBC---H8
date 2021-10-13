@@ -1,0 +1,16 @@
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\obj\Debug\net5.0\Tugas.csproj.AssemblyReference.cache
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\obj\Debug\net5.0\Tugas.GeneratedMSBuildEditorConfig.editorconfig
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\obj\Debug\net5.0\Tugas.AssemblyInfoInputs.cache
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\obj\Debug\net5.0\Tugas.AssemblyInfo.cs
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\obj\Debug\net5.0\Tugas.csproj.CoreCompileInputs.cache
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\bin\Debug\net5.0\Tugas.exe
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\bin\Debug\net5.0\Tugas.deps.json
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\bin\Debug\net5.0\Tugas.runtimeconfig.json
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\bin\Debug\net5.0\Tugas.runtimeconfig.dev.json
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\bin\Debug\net5.0\Tugas.dll
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\bin\Debug\net5.0\ref\Tugas.dll
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\bin\Debug\net5.0\Tugas.pdb
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\obj\Debug\net5.0\Tugas.dll
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\obj\Debug\net5.0\ref\Tugas.dll
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\obj\Debug\net5.0\Tugas.pdb
+D:\Materi Kuliah (Fikri)\OCBC\C#\Sesi05\Tugas\obj\Debug\net5.0\Tugas.genruntimeconfig.cache
