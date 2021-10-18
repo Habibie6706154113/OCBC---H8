@@ -1,0 +1,7 @@
+kondisi refresh token yang dapat berjalan hanya ketika:
+- not expired
+- token has been used
+
+sisanya akan mengeluarkan response something went wrong
+
+swegger hanya bisa dijalankan tanpa app.UseHttpsRedirection(); 

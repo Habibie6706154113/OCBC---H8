@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2021 at 03:33 PM
+-- Generation Time: Oct 17, 2021 at 06:11 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.4.24
 
@@ -34,6 +34,13 @@ CREATE TABLE `items` (
   `Duration` longtext DEFAULT NULL,
   `ReleaseDate` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `items`
+--
+
+INSERT INTO `items` (`Id`, `Name`, `Genre`, `Duration`, `ReleaseDate`) VALUES
+(1, 'Tenet', 'Action/Science Fiction', '02:30:00', '2021/02/10');
 
 -- --------------------------------------------------------
 
@@ -77,7 +84,7 @@ ALTER TABLE `__efmigrationshistory`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
