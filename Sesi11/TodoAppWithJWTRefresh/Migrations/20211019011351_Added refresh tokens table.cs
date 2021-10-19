@@ -17,7 +17,7 @@ namespace TodoAppWithJWT.Migrations
                     Token = table.Column<string>(type: "TEXT", nullable: true),
                     JwtId = table.Column<string>(type: "TEXT", nullable: true),
                     IsUsed = table.Column<bool>(type: "INTEGER", nullable: false),
-                    IsRevorked = table.Column<bool>(type: "INTEGER", nullable: false),
+                    IsRevoked = table.Column<bool>(type: "INTEGER", nullable: false),
                     AddedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     ExpiryDate = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },

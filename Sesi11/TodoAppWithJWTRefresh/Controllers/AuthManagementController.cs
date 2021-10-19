@@ -26,14 +26,15 @@ namespace TodoAppWithJWT.Controllers{
         private readonly ApiDbContext _apiDbContext;
 
         public AuthManagementController(
-            UserManager<IdentityUser> userManager,
+            UserManager<IdentityUser> userManager, 
             IOptionsMonitor<JwtConfig> optionsMonitor,
-            TokenValidationParameters tokenValidationParams,
-            ApiDbContext apiDbContext){
-                _userManager = userManager;
-                _jwtConfig = optionsMonitor.CurrentValue;
-                _tokenValidationParams = tokenValidationParams;
-                _apiDbContext = apiDbContext;
+            TokenValidationParameters tokenValidationParameters,
+            ApiDbContext apiDbContext) 
+        {
+            _userManager = userManager;
+            _jwtConfig = optionsMonitor.CurrentValue;
+            _tokenValidationParams = tokenValidationParameters;
+            _apiDbContext = apiDbContext;
         }
 
         [HttpPost]
@@ -54,12 +55,14 @@ namespace TodoAppWithJWT.Controllers{
                 var newUser = new IdentityUser() {Email = user.Email, UserName = user.Username};
                 var isCreated = await _userManager.CreateAsync(newUser, user.Password);
                 if (isCreated.Succeeded){
-                    var jwtToken = GenerateJwtToken(newUser);
+                    //var jwtToken = GenerateJwtToken(newUser);
 
-                    return Ok(jwtToken);//new RegistrationResponse(){
+                    //return Ok(new RegistrationResponse(){
                     //    Success = true,
                     //    Token = jwtToken
                     //});
+                    var jwtToken = await GenerateJwtToken(newUser);
+                    return Ok(jwtToken);
                 } else {
                     return BadRequest(new RegistrationResponse(){
                         Errors = isCreated.Errors.Select(x => x.Description).ToList(),
@@ -101,12 +104,14 @@ namespace TodoAppWithJWT.Controllers{
                     });
                 }
 
-                var jwtToken = GenerateJwtToken(existingUser);
+                //var jwtToken = GenerateJwtToken(existingUser);
 
-                return Ok(jwtToken);//new RegistrationResponse(){
+                //return Ok(new RegistrationResponse(){
                 //    Success = true,
                 //    Token = jwtToken
                 //});
+                var jwtToken = await GenerateJwtToken(existingUser);
+                return Ok(jwtToken);
             }
 
             return BadRequest(new RegistrationResponse(){
@@ -119,127 +124,135 @@ namespace TodoAppWithJWT.Controllers{
 
         [HttpPost]
         [Route("RefreshToken")]
-        public async Task<IActionResult> RefreshToken([FromBody] TokenRequest tokenRequest){
-            if(ModelState.IsValid){
-                var result = await VerifyAndGenerateToken(tokenRequest);
+        public async Task<IActionResult> RefreshToken([FromBody] TokenRequest tokenRequest)
+        {
+            if(ModelState.IsValid) {
+                var res = await VerifyAndGenerateToken(tokenRequest);
 
-                if(result == null){
-                    return BadRequest(new RegistrationResponse(){
-                        Errors = new List<string>(){
-                            "Invalid tokens"
+                if(res == null) {
+                    return BadRequest(new RegistrationResponse() {
+                        Errors = new List<string>() {
+                            "Invalid Tokens"
                         },
                         Success = false
                     });
                 }
-                return Ok(result);
+
+                return Ok(res);
             }
 
-            return BadRequest(new RegistrationResponse(){
-                Errors = new List<string>(){
-                    "Invalid payload"
+            return BadRequest(new RegistrationResponse() {
+                Errors = new List<string>() {
+                    "Invalid payload!"
                 },
                 Success = false
             });
         }
 
-        private async Task<AuthResult> GenerateJwtToken(IdentityUser user){
+        private async Task<AuthResult> GenerateJwtToken(IdentityUser user) {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
             var key = Encoding.ASCII.GetBytes(_jwtConfig.Secret);
 
-            var tokenDescriptor = new SecurityTokenDescriptor{
-                Subject = new ClaimsIdentity(new []{
+            var tokenDescriptor = new SecurityTokenDescriptor {
+                Subject = new ClaimsIdentity(new [] 
+                {
                     new Claim("Id", user.Id),
                     new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 }),
-                Expires = DateTime.UtcNow.AddSeconds(10),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+
+                Expires = DateTime.UtcNow.AddSeconds(1800),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
             var jwtToken = jwtTokenHandler.WriteToken(token);
 
-            var refreshToken = new RefreshToken(){
+            var refreshToken = new RefreshToken() {
                 JwtId = token.Id,
                 IsUsed = false,
-                IsRevorked = false,
+                IsRevoked = false,
                 UserId = user.Id,
                 AddedDate = DateTime.UtcNow,
                 ExpiryDate = DateTime.UtcNow.AddMonths(6),
                 Token = RandomString(35) + Guid.NewGuid()
             };
-            
+
             await _apiDbContext.RefreshTokens.AddAsync(refreshToken);
             await _apiDbContext.SaveChangesAsync();
 
-            return new AuthResult(){
+            //return jwtToken;
+            return new AuthResult() {
                 Token = jwtToken,
                 Success = true,
                 RefreshToken = refreshToken.Token
             };
-            //return jwtToken;
-        }  
+        }
 
-        private string RandomString(int length){
+        private string RandomString(int length)
+        {
             var random = new Random();
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length)
                 .Select(x => x[random.Next(x.Length)]).ToArray());
         }
 
-        private async Task<AuthResult> VerifyAndGenerateToken(TokenRequest tokenRequest){
+        private async Task<AuthResult> VerifyAndGenerateToken(TokenRequest tokenRequest)
+        {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
 
-            try{
+            try
+            {
                 var tokenInVerification = jwtTokenHandler.ValidateToken(tokenRequest.Token, _tokenValidationParams, out var validatedToken);
 
-                if (validatedToken is JwtSecurityToken jwtSecurityToken){
-                    var result = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
+                if (validatedToken is JwtSecurityToken jwtSecurityToken) {
+                    var res = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
 
-                    if (result == false){
+                    if (res == false) {
                         return null;
                     }
                 }
 
-                var utcExpiryDate = long.Parse(tokenInVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
-
+                var utcExpiryDate = long.Parse(tokenInVerification.Claims.FirstOrDefault(x=> x.Type == JwtRegisteredClaimNames.Exp).Value);
                 var expiryDate = UnixTimeStampToDateTime(utcExpiryDate);
 
-                if (expiryDate > DateTime.UtcNow){
-                    return new AuthResult(){
+                if(expiryDate > DateTime.UtcNow) {
+                    return new AuthResult() {
                         Success = false,
-                        Errors = new List<string>(){
-                            "Token has not yet expired"
+                        Errors = new List<string>() {
+                            "Token has not yet expired!"
                         }
                     };
                 }
 
                 var storedToken = _apiDbContext.RefreshTokens.FirstOrDefault(x => x.Token == tokenRequest.RefreshToken);
 
-                if (storedToken == null){
-                    return new AuthResult(){
+                if(storedToken == null) {
+                    return new AuthResult() {
                         Success = false,
-                        Errors = new List<string>(){
+                        Errors = new List<string>() {
                             "Token does not exist"
                         }
                     };
                 }
 
-                if (storedToken.IsUsed){
-                    return new AuthResult(){
+                if(storedToken.IsUsed) {
+                    return new AuthResult() {
                         Success = false,
-                        Errors = new List<string>(){
+                        Errors = new List<string>() {
                             "Token has been used"
                         }
                     };
                 }
 
-                if (storedToken.IsRevorked){
-                    return new AuthResult(){
+                if(storedToken.IsRevoked) {
+                    return new AuthResult() {
                         Success = false,
-                        Errors = new List<string>(){
+                        Errors = new List<string>() {
                             "Token has been revoked"
                         }
                     };
@@ -247,11 +260,11 @@ namespace TodoAppWithJWT.Controllers{
 
                 var jti = tokenInVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
 
-                if (storedToken.JwtId != jti) {
-                    return new AuthResult() {
+                if (storedToken.JwtId != jti){
+                    return new AuthResult(){
                         Success = false,
-                        Errors = new List<string>() {
-                            "Token does not match!"
+                        Errors = new List<string>(){
+                            "Token Doesn't match"
                         }
                     };
                 }
@@ -263,7 +276,8 @@ namespace TodoAppWithJWT.Controllers{
                 var dbUser = await _userManager.FindByEmailAsync(storedToken.UserId);
                 return await GenerateJwtToken(dbUser);
             }
-            catch(Exception ex){
+            catch (Exception ex)
+            {
                 if(ex.Message.Contains("Lifetime validation failed. The token is expired.")) {
                     return new AuthResult() {
                         Success = false,
@@ -271,20 +285,20 @@ namespace TodoAppWithJWT.Controllers{
                             "Token has expired please re-login"
                         }
                     };
-                } else{
-                    return new AuthResult(){
+                } else {
+                    return new AuthResult() {
                         Success = false,
-                        Errors = new List<string>(){
-                            "Somethin went Wrong."
+                        Errors = new List<string>() {
+                            "Something went wrong."
                         }
                     };
                 }
             }
         }
 
-        private DateTime UnixTimeStampToDateTime(long unixTimeStamp){
+        private DateTime UnixTimeStampToDateTime(long unixTs) {
             var dateTimeVal = new DateTime(1970, 1,1,0,0,0,0, DateTimeKind.Utc);
-            dateTimeVal = dateTimeVal.AddSeconds(unixTimeStamp).ToUniversalTime();
+            dateTimeVal = dateTimeVal.AddSeconds(unixTs).ToUniversalTime();
 
             return dateTimeVal;
         }

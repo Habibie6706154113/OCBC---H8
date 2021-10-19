@@ -34,23 +34,20 @@ namespace TodoAppWithJWT
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
-            services.AddDbContext<ApiDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")
-                ));
 
             var key = Encoding.ASCII.GetBytes(Configuration["JwtConfig:Secret"]);
 
-            var tokenValidationParams = new TokenValidationParameters{
+            var tokenValidateParams = new TokenValidationParameters {
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ValidateIssuer = false,
                 ValidateAudience = false,
                 ValidateLifetime = true,
-                RequireExpirationTime = false
+                RequireExpirationTime = false,
+                ClockSkew = TimeSpan.Zero
             };
 
-            services.AddSingleton(tokenValidationParams);
+            services.AddSingleton(tokenValidateParams);
 
             services.AddAuthentication(options => {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -59,16 +56,21 @@ namespace TodoAppWithJWT
             })
             .AddJwtBearer(jwt => {
                 jwt.SaveToken = true;
-                jwt.TokenValidationParameters = tokenValidationParams;
+                jwt.TokenValidationParameters = tokenValidateParams;
             });
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApiDbContext>();
+            services.AddDefaultIdentity<IdentityUser>(opt => opt.SignIn.RequireConfirmedAccount = true)
+                        .AddEntityFrameworkStores<ApiDbContext>();
+
+            services.AddDbContext<ApiDbContext>(options => 
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")
+                ));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoAppWithJWT", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TodoApp", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 

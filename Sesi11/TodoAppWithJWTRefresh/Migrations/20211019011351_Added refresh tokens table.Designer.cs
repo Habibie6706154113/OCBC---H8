@@ -9,7 +9,7 @@ using TodoAppWithJWT.Data;
 namespace TodoAppWithJWT.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20211018135008_Added refresh tokens table")]
+    [Migration("20211019011351_Added refresh tokens table")]
     partial class Addedrefreshtokenstable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -246,7 +246,7 @@ namespace TodoAppWithJWT.Migrations
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsRevorked")
+                    b.Property<bool>("IsRevoked")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsUsed")

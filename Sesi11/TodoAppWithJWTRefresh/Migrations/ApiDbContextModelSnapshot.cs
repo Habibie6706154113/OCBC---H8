@@ -244,7 +244,7 @@ namespace TodoAppWithJWT.Migrations
                     b.Property<DateTime>("ExpiryDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsRevorked")
+                    b.Property<bool>("IsRevoked")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsUsed")
