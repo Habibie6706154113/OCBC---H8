@@ -1,0 +1,11 @@
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\CoreWebApi.exe
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\appsettings.Development.json
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\appsettings.json
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\CoreWebApi.dll
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\CoreWebApi.deps.json
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\CoreWebApi.runtimeconfig.json
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\CoreWebApi.pdb
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\Microsoft.OpenApi.dll
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\Swashbuckle.AspNetCore.Swagger.dll
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Materi Kuliah (Fikri)\Assignment\CoreWebApi\CoreWebApi\bin\Release\net5.0\publish\Swashbuckle.AspNetCore.SwaggerUI.dll
