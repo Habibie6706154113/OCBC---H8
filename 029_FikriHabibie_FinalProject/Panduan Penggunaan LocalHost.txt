@@ -1,0 +1,56 @@
+===================================================
+
+Panduan Penggunaan Api pada Localhost:
+1. nyalakan apache dan mysql pada xampp
+2. jalankan project dengan dotnet run
+3. masukkan url pada browser
+   url: http://localhost:5000/swagger/index.html
+
+===================================================
+
+Panduan Menjalankan program register, login, dan refrestoken:
+1. pilih post regitrasi untuk mendaftarkan akun dan 
+   masukkan data dengan sebuah perintah untuk melakukan registrasi
+   contoh: 
+   {
+	"username": "string",
+	"email": "user@example.com",
+	"password": "string"
+   }
+2. pilih post login untuk mendapatkan token dan 
+   masukkan email dan password 
+   contoh:
+   {
+	"email": "user@example.com",
+	"password": "string"
+   }
+3. pilih post refreshtoken untuk mengetahui apakah token masih aktif
+   dan masukkan token dengan sebuah perintah untuk melakukan cek pada 
+   token yang sudah didapat
+   contoh:
+   {
+	"token": "string",
+	"refreshToken": "string"
+   }
+
+======================================================
+
+panduan menjalankan program payment:
+1. pilih Authorize lalu masukkan token yang sudah didapat setelah login:
+   contoh:
+   Bearer(spasi){Token Anda}
+2. pilih get pada payment untuk melihat isi database
+3. pilih post pada payment dan masukkan data dengan sebuah perintah 
+   untuk memasukkan data pada database
+   contoh:
+   {
+	"paymentDetailId": 0,
+  	"cardOwnerName": "string",
+  	"cardNumber": "string",
+  	"expirationDate": "string",
+  	"securityCode": "string"
+   }
+4. pilih get(id) pada payment untuk melihat isi database sesuai id yang dimasukkan
+5. pilih put pada payment untuk melakukan update data yang telah dipilih berdasarkan id
+6. pilih delete pada payment untuk menghapus data yang dipilih berdasarkan id
+  
